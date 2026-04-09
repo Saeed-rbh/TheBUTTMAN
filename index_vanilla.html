@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Butt-Man: The Superhero NFT 🦸‍♂️🍑</title>
+    <meta name="description"
+        content="Welcome to the quirkiest, heroic, and most colorful NFT project on the blockchain!">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Mali:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="custom-cursor"></div>
+    <div class="cursor-trail"></div>
+    <div id="pow-container"></div>
+    <div id="peach-rain"></div>
+
+    <div class="wacky-marquee">
+        <div class="marquee-content">
+            🦸‍♂️ WARNING: THE HERO HAS ARRIVED 🌈 PROTECTING THE BLOCKCHAIN ONE CHEEK AT A TIME 🍑 JUSTICE NEVER LOOKED
+            SO WEIRD 🦸‍♂️ 🦸‍♂️ WARNING: THE HERO HAS ARRIVED 🌈 PROTECTING THE BLOCKCHAIN ONE CHEEK AT A TIME 🍑
+            JUSTICE NEVER LOOKED SO WEIRD 🦸‍♂️
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">CAPTAIN BUTT-MAN</div>
+        <ul class="nav-links">
+            <li><a href="#about">Origin Story</a></li>
+            <li><a href="#roadmap">Justice Protocol</a></li>
+            <li><a href="#mint">Assemble Here</a></li>
+            <li><button id="nolan-toggle-btn" class="nolan-btn">🦇 ENGAGE NOLAN MODE</button></li>
+        </ul>
+        <button class="wallet-btn">Connect Wallet</button>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="glitch-text" data-text="MEET THE BUTT-MAN">MEET THE BUTT-MAN</h1>
+                <p class="subtitle">He’s got eyes on his cheeks and rainbows on his feet. The most bizarre and wonderful
+                    NFT you'll ever own.</p>
+                <div class="cta-group">
+                    <button class="primary-btn bounce-on-hover"><a href="#mint"
+                            style="color:inherit; text-decoration:none;">Mint a Butt! 🍑</a></button>
+                    <button class="secondary-btn">Join Discord</button>
+                </div>
+            </div>
+            <div class="hero-image-container">
+                <img src="./assets/character.png" alt="The Butt-Man Character" id="main-character-img"
+                    class="floating-img">
+                <div class="shadow"></div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="easter-egg-container">
+                <button id="crazy-btn" class="danger-btn">⚠️ ACTIVATE SUPER-SPIN</button>
+            </div>
+            <h2 class="section-title wobbly-text">THE ORIGIN STORY</h2>
+            <div class="about-grid">
+                <div class="about-card comic-panel">
+                    <h3>👁️ Omnidirectional Vision</h3>
+                    <p>Bitten by a radioactive pair of pants. He possesses absolute 360-degree awareness without turning
+                        his head.</p>
+                </div>
+                <div class="about-card comic-panel">
+                    <h3>🌈 The Speed Socks</h3>
+                    <p>His magical rainbow toe-socks allow him to run at mach speeds while maintaining ultimate comfort.
+                    </p>
+                </div>
+                <div class="about-card comic-panel">
+                    <h3>🐻 Disarming Cuteness</h3>
+                    <p>Villains surrender instantly upon gazing at his adorable blue ears. It's his greatest weapon.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="roadmap-section">
+            <h2 class="section-title bouncy-text">THE JUSTICE PROTOCOL</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot">1</div>
+                    <div class="timeline-content comic-panel">
+                        <h3>Issue #1: The Awakening</h3>
+                        <p>10,000 Captain Butt-Men assemble on the blockchain to fight the evil forces of boredom.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2</div>
+                    <div class="timeline-content comic-panel">
+                        <h3>Issue #2: The Utility Belt</h3>
+                        <p>Airdrops of magical rainbow sock merchandise directly to your secret lair.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">3</div>
+                    <div class="timeline-content comic-panel">
+                        <h3>Issue #3: The Animated Series</h3>
+                        <p>Our hero jumps onto screens everywhere, fighting crime with intense squats.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mint" class="mint-section">
+            <div class="mint-container comic-panel">
+                <h2>ASSEMBLE YOUR HEROES</h2>
+                <div class="mint-box">
+                    <div class="mint-counter">
+                        <button class="qty-btn" id="decrease-qty">-</button>
+                        <span id="mint-qty">1</span>
+                        <button class="qty-btn" id="increase-qty">+</button>
+                    </div>
+                    <div class="mint-price">0.069 ETH / each</div>
+                    <button class="mint-btn rainbow-btn" id="mint-action-btn">MINT NOW</button>
+                    <p class="mint-status">6,942 / 10,000 Minted</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 The Butt-Man Project. No butts were harmed in the making of this site.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

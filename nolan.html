@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Dark Butt: Story Map</title>
+    <!-- External Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Mali:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Map Styles Override */
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            margin: 0;
+            padding: 0;
+            font-family: Impact, sans-serif;
+            overflow-x: auto;
+            overflow-y: hidden;
+            background-image:
+                radial-gradient(circle at 100% 50%, rgba(79, 224, 237, 0.05) 0%, transparent 50%),
+                radial-gradient(#000 2px, transparent 2px);
+            background-size: 100vw 100px, 30px 30px;
+        }
+
+        /* Hide Scrollbar */
+        ::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ff3333;
+            border-radius: 5px;
+        }
+
+        .nolan-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 3%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .nolan-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .back-btn {
+            pointer-events: auto;
+            background: #fff;
+            color: #000;
+            border: 2px solid #ff3333;
+            padding: 8px 16px;
+            font-size: 1rem;
+            font-family: 'Fredoka One', cursive;
+            cursor: none;
+            box-shadow: 4px 4px 0 #ff3333;
+            transition: 0.2s;
+        }
+
+        .back-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #fff;
+            background: #ff3333;
+            color: #fff;
+        }
+
+        /* The Map Timeline */
+        .story-map-container {
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            padding: 0 10vw;
+            width: max-content;
+            position: relative;
+        }
+
+        /* The Connecting Line */
+        @keyframes marchingAnts {
+            to {
+                background-position: -30px 0;
+            }
+        }
+
+        .timeline-path {
+            position: absolute;
+            top: 50%;
+            left: 5vw;
+            right: 5vw;
+            height: 6px;
+            background: repeating-linear-gradient(90deg, #ff3333 0, #ff3333 15px, transparent 15px, transparent 30px);
+            z-index: 0;
+            opacity: 0.6;
+            animation: marchingAnts 1s linear infinite;
+        }
+
+        .story-card {
+            position: relative;
+            z-index: 1;
+            min-width: 320px;
+            max-width: 320px;
+            margin: 0 4rem;
+            background: #1e293b;
+            border: 4px solid #334155;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 10px 10px 0 #000;
+            opacity: 0.3;
+            transform: scale(0.9) translateY(0);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            white-space: normal;
+        }
+
+        /* Map Position Alternating - Initial Crazy Pop-in State */
+        .story-card:nth-child(even) {
+            transform: scale(0.2) translateY(300px) rotate(-15deg);
+        }
+
+        .story-card:nth-child(odd) {
+            transform: scale(0.2) translateY(-300px) rotate(15deg);
+        }
+
+        .story-card.in-view {
+            opacity: 1;
+            border-color: #ff3333;
+            box-shadow: 0 0 40px rgba(255, 51, 51, 0.4), 10px 10px 0 #000;
+        }
+
+        /* Snap into place with a slight tilt */
+        .story-card.in-view:nth-child(even) {
+            transform: scale(1) translateY(20px) rotate(3deg);
+        }
+
+        .story-card.in-view:nth-child(odd) {
+            transform: scale(1) translateY(-20px) rotate(-3deg);
+        }
+
+        /* Wobbly Hover on the Card strictly after pop-in */
+        .story-card.in-view:hover {
+            transform: scale(1.1) translateY(0px) rotate(0deg);
+            box-shadow: 0 0 70px rgba(255, 51, 51, 0.8), 20px 20px 0 #000;
+            z-index: 10;
+        }
+
+        /* Timeline Dot */
+        .story-card::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff3333;
+            border: 4px solid #0f172a;
+            border-radius: 50%;
+            left: 50%;
+        }
+
+        .story-card:nth-child(even)::after {
+            top: -60px;
+            transform: translateX(-50%);
+        }
+
+        .story-card:nth-child(odd)::after {
+            bottom: -60px;
+            transform: translateX(-50%);
+        }
+
+        @keyframes jiggle {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-8px) rotate(3deg);
+            }
+
+            75% {
+                transform: translateY(8px) rotate(-3deg);
+            }
+        }
+
+        .story-card img {
+            width: 100%;
+            max-width: 180px;
+            height: auto;
+            border-radius: 10px;
+            border: 4px solid #000;
+            margin-bottom: 1rem;
+            filter: grayscale(60%) contrast(120%);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: jiggle 4s infinite ease-in-out;
+        }
+
+        .story-card:hover img {
+            filter: grayscale(0%) contrast(150%) hue-rotate(90deg);
+            transform: scale(1.2) rotate(360deg);
+        }
+
+        .story-card h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.8rem;
+            color: #ff3333;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .story-card p {
+            margin: 0;
+            font-family: 'Mali', cursive;
+            font-size: 1rem;
+            color: #cbd5e1;
+            line-height: 1.4;
+        }
+
+        #un-portal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            background: #ff85c2;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            transform: translate(-50%, -50%) scale(0) rotate(0deg);
+            z-index: 99999;
+            transition: transform 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none;
+            box-shadow: inset -20px -20px 0 rgba(255, 255, 255, 0.4), 0 0 100px #ffe100;
+        }
+
+        #un-portal.expand {
+            transform: translate(-50%, -50%) scale(150) rotate(-720deg);
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #000;
+            border-radius: 50%;
+            background-color: #ff3333;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
+
+        .variant-hint {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff3333;
+            border: 2px solid #000;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-family: 'Fredoka One', cursive;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            z-index: 20;
+            box-shadow: 2px 2px 0 #000;
+        }
+
+        .story-card:hover .variant-hint {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .variant-img {
+            cursor: pointer;
+        }
+
+        /* Intro Block */
+        .story-intro {
+            min-width: 500px;
+            max-width: 500px;
+            margin-right: 6rem;
+            margin-left: 2rem;
+            color: #cbd5e1;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            z-index: 1;
+            text-align: left;
+            font-family: 'Mali', cursive;
+        }
+
+        .story-intro h1 {
+            color: #ff3333;
+            font-size: 4rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            line-height: 1;
+            font-family: Impact, sans-serif;
+            text-shadow: 3px 3px 0 #000;
+        }
+
+        .scroll-hint {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            color: #94a3b8;
+            font-family: 'Fredoka One', cursive;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(10px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="un-portal"></div>
+    <div class="custom-cursor"></div>
+
+    <div class="nolan-header">
+        <h2 style="color:#ff3333; letter-spacing: 5px;">THE ROGUES MAP</h2>
+        <button class="back-btn" id="return-btn">🔙 RETURN TO THE LIGHT</button>
+    </div>
+
+    <div class="scroll-hint">SCROLL HORIZONTALLY ➔</div>
+
+    <div class="story-map-container">
+        <div class="timeline-path"></div>
+
+        <!-- The Dark Transition Intro -->
+        <div class="story-intro">
+            <h1>THE DESCENT</h1>
+            <p>What happens when a colorful, radiant superhero loses his way? He gets <strong>rebooted</strong> into a
+                gritty, cinematic universe full of brooding stares and moral ambiguity.</p>
+            <p style="margin-top: 1rem;">Welcome to the <strong>Dark Side of the Butt</strong>. As you travel through
+                these archives, you will witness the tragic, unfortunate origins that birthed the worst (and most
+                uncomfortably seated) villains Gotham has ever seen...</p>
+        </div>
+
+        <!-- Villain Cards -->
+        <div class="story-card">
+            <div class="variant-hint">Variants (1/1) ⟳</div>
+            <img class="variant-img" src="./assets/batman/The_Dark_Butt/1.png" data-folder="The_Dark_Butt"
+                alt="The Dark Butt">
+            <h3>The Dark Butt</h3>
+            <p>He is vengeance. He is the night. He is inexplicably uncomfortable to sit on.</p>
+        </div>
+
+        <div class="story-card">
+            <div class="variant-hint">Variants (1/1) ⟳</div>
+            <img class="variant-img" src="./assets/batman/Harvey_Two_Butt/1.png" data-folder="Harvey_Two_Butt"
+                alt="Harvey Two-Butt">
+            <h3>Harvey Two-Butt</h3>
+            <p>Once a hero, his face was scarred... replacing it completely with a sentient gluteus maximus.</p>
+        </div>
+
+        <div class="story-card">
+            <div class="variant-hint">Variants (1/1) ⟳</div>
+            <img class="variant-img" src="./assets/batman/Butt_Bane/1.png" data-folder="Butt_Bane" alt="Butt-Bane">
+            <h3>Butt-Bane</h3>
+            <p>"You think cheeks are your ally? I was born in them." His only weakness is finding pants that fit.</p>
+        </div>
+
+        <div class="story-card">
+            <div class="variant-hint">Variants (1/1) ⟳</div>
+            <img class="variant-img" src="./assets/batman/Doc_Butto/1.png" data-folder="Doc_Butto" alt="Doc Butto">
+            <h3>Doc Butto</h3>
+            <p>From the wrong universe! Four mechanical tentacles on his rear end make him immensely terrifying.</p>
+        </div>
+
+        <div class="story-card">
+            <div class="variant-hint">Variants (1/1) ⟳</div>
+            <img class="variant-img" src="./assets/batman/The_Scare_Butt/1.png" data-folder="The_Scare_Butt"
+                alt="Scare Butt">
+            <h3>The Scare-Butt</h3>
+            <p>Uses fear toxin to plunge victims into terrifying hallucinations made entirely of tight denim.</p>
+        </div>
+
+        <div class="story-card">
+            <div class="variant-hint">Variants (1/1) ⟳</div>
+            <img class="variant-img" src="./assets/batman/Ras_al_Butt/1.png" data-folder="Ras_al_Butt"
+                alt="Ra's al Butt">
+            <h3>Ra's al Butt</h3>
+            <p>Seeks to cleanse Gotham via an orbital strike of giant, devastatingly stinky athletic socks.</p>
+        </div>
+
+        <div class="story-card">
+            <div class="variant-hint">Variants (1/1) ⟳</div>
+            <img class="variant-img" src="./assets/batman/The_Butt_dler/1.png" data-folder="The_Butt_dler"
+                alt="The Butt-dler">
+            <h3>The Butt-dler</h3>
+            <p>Leaves infuriating puzzles involving the mathematics of complicated seating arrangements.</p>
+        </div>
+
+        <div class="story-card">
+            <div class="variant-hint">Variants (1/1) ⟳</div>
+            <img class="variant-img" src="./assets/batman/Poison_Butt_vy/1.png" data-folder="Poison_Butt_vy"
+                alt="Poison Butt-vy">
+            <h3>Poison Butt-vy</h3>
+            <p>Mutating harmless poison ivy into dangerous wedgie-inducing superhero-trapping vines.</p>
+        </div>
+
+        <div class="story-card">
+            <div class="variant-hint">Variants (1/1) ⟳</div>
+            <img class="variant-img" src="./assets/batman/Mr_Freeze_Butt/1.png" data-folder="Mr_Freeze_Butt"
+                alt="Mr Freeze Butt">
+            <h3>Mr Freeze-Butt</h3>
+            <p>Driven by tragedy to wield the coldest, most rigid buns in the entire criminal underworld.</p>
+        </div>
+
+        <!-- End Spacer -->
+        <div style="min-width: 10vw;"></div>
+    </div>
+
+    <script src="nolan_script.js"></script>
+</body>
+
+</html>
