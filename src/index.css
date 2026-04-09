@@ -9,8 +9,8 @@
     --purple: #8b5cf6;
     --white: #ffffff;
     --black: #000000;
-    --font-heading: 'Impact', sans-serif;
-    --font-body: 'Mali', cursive;
+    --font-heading: 'Anton', 'Impact', sans-serif;
+    --font-body: 'Mali', cursive, sans-serif;
 }
 
 * {
@@ -216,8 +216,8 @@ button:active {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 200vw;
-    height: 200vw;
+    width: 400vmax;
+    height: 400vmax;
     transform: translate(-50%, -50%);
     background: repeating-conic-gradient(from 0deg,
             rgba(255, 51, 51, 0.15) 0deg 15deg,
@@ -241,8 +241,8 @@ button:active {
 
 .comic-issue-sticker {
     position: absolute;
-    top: -2rem;
-    right: 10%;
+    top: -6rem;
+    right: 80%;
     background: var(--red);
     color: var(--yellow);
     font-family: var(--font-heading);
@@ -340,6 +340,8 @@ button:active {
     animation: float 4s ease-in-out infinite;
     filter: drop-shadow(15px 15px 0px var(--red)) drop-shadow(4px 4px 0px var(--black));
     transition: transform 0.3s;
+    z-index: 100;
+    opacity: 0.9;
 }
 
 .floating-img:hover {
